@@ -29,3 +29,17 @@ exports.create = (req, res) => {
     });
 
 }
+
+exports.findAll = (req, res) => {
+    urlLink.findAll((err, links)=>{
+        console.log('controller')
+
+        if(err)
+
+        res.send(err);
+
+        console.log('res', links)
+
+        res.send(links)
+    })
+}
