@@ -21,5 +21,4 @@ app.use('/signUp', signUp);
 app.use('/short', shortLinks);
 app.use('/links', allLinks);
 
-
 app.listen(port);
