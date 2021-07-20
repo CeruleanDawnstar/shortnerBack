@@ -11,7 +11,7 @@ exports.findAll = function(req, res) {
 };
 
 exports.findById = function(req, res) {
-    Users.findAll(req.params.idUser, function(err, User) {
+    Users.findById(req.params.idUser, function(err, User) {
         if(err)
         res.send(err);
         console.log('res', User);
