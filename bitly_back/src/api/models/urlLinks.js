@@ -37,5 +37,16 @@ urlLink.findAll = (result)=>{
     })
 }
 
+urlLink.findById = (id, result)=>{
+    dbConn.query("SELECT * FROM link WHERE id = ?", id, (err, res)=>{
+        if(err){
+            console.log("error: ", err);
+            result(err, null);
+        }else{
+            result(res);
+        }
+    })
+}
+
 
 module.exports = urlLink;
