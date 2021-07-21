@@ -1,8 +1,8 @@
-const Utilisateurs = require('../models/userModels');
+const utilisateurs = require('../models/userModels');
 
 
 exports.findAll = function(req, res) {
-    Utilisateurs.findAll(function(err, User) {
+    utilisateurs.findAll(function(err, User) {
         console.log('controller')
         if(err)
         res.send(err);
@@ -20,21 +20,18 @@ exports.findById = function(req, res) {
     });
 };
 
-exports.update = function(req, res) {
-
-        console.log(req.body);
-        Utilisateurs.update(req.params.id, new Utilisateurs(req.body),
-        function(err, User) {
-            if(err) {
-                res.send(err);
-            }
-                else {
-                    res.json({error:false, message: 'User successfully updated'});
-                    console.log(User);
-                }
-    
+exports.update = (req, res)=> {
+    utilisateurs.update(req.params.id, new utilisateurs(req.body), (err, data) =>{
+        if (err) {
+        res.status(500);
+        res.json({
+            message: "Erreur serveur."
         });
-
+        } else {
+        res.status(200);
+        res.json({ message: 'User successfully updated' });
+        }
+    });
 };
 
 exports.delete = function(req, res) {
@@ -44,4 +41,3 @@ exports.delete = function(req, res) {
         res.json({error:false, message: 'User successfully deleted'});
     });
 };
-

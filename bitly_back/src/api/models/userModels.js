@@ -2,15 +2,12 @@ const DataBaseHandler = require("../config/DataBaseHandler");
 const dataBaseHandler = new DataBaseHandler();
 const connection = dataBaseHandler.createConnection();
 
+const utilisateurs = function(User){
+    this.pseudo = User.pseudo;
+    this.password = User.password;
+}
 
-const Utilisateurs = function(User){(
-
-    this.idUser = User.idUser,
-    this.pseudo = User.pseudo,
-    this.password = User.password
-)};
-
-Utilisateurs.findById = function (idUser, result) {
+utilisateurs.findById = function (idUser, result) {
     connection.query("SELECT * from User WHERE idUser =?", idUser, function (err, res) {
         if(err) {
             console.log("error: ", err);
@@ -23,8 +20,7 @@ Utilisateurs.findById = function (idUser, result) {
     });
 };
 
-
-Utilisateurs.findAll = function (result) {
+utilisateurs.findAll = function (result) {
     connection.query("Select * from User", function (err, res) {
         if(err) {
             console.log("error: ", err);
@@ -37,20 +33,7 @@ Utilisateurs.findAll = function (result) {
     });
 };
 
-// Utilisateurs.update = function(idUser, User, result) {
-//     connection.query("UPDATE User SET ? WHERE idUser = ?",[User, idUser],
-//     function (err, res) {
-//         if(err) {
-//             console.log("error: ", err);
-//             result(null, err);
-//         }
-//         else {
-//             result(null, res);
-//         }
-//     });
-// };
-
-Utilisateurs.update = function(idUser, User, result){
+utilisateurs.update = function(idUser, User, result){
     console.log(User);
     connection.query("UPDATE User SET ? WHERE idUser = ?", [User, idUser],  (err, res) => {
         if(err) {
@@ -62,10 +45,7 @@ Utilisateurs.update = function(idUser, User, result){
     });
 };
 
-
-
-
-Utilisateurs.delete = function(idUser, result) {
+utilisateurs.delete = function(idUser, result) {
     connection.query("DELETE FROM User WHERE idUser = ?", [idUser], function (err, res) {
         if(err) {
             console.log("error: ", err);
@@ -77,5 +57,4 @@ Utilisateurs.delete = function(idUser, result) {
     });
 };
 
-
-  module.exports = Utilisateurs;
+module.exports = utilisateurs;
