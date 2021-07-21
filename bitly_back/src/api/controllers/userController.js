@@ -21,10 +21,7 @@ exports.findById = function(req, res) {
 };
 
 exports.update = function(req, res) {
-    // if(req.body.constructor === Object && Object.keys(req.body).length === 0) {
-    //     res.status(400).send({error:true, message: 'Please provide all required field'});
-    // }
-    // else {
+
         console.log(req.body);
         Utilisateurs.update(req.params.id, new Utilisateurs(req.body),
         function(err, User) {
@@ -37,7 +34,7 @@ exports.update = function(req, res) {
                 }
     
         });
-//    }
+
 };
 
 exports.delete = function(req, res) {
