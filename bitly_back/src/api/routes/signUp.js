@@ -3,7 +3,6 @@ const router = express.Router();
 
 const DataBaseHandler = require("../config/DataBaseHandler");
 const dataBaseHandler = new DataBaseHandler();
-
 const connection = dataBaseHandler.createConnection();
 
 const jwtSecret = process.env.JWT_SECRET || "jwt_secret";
@@ -18,7 +17,6 @@ router.post("/", (req, res, next) => {
       const newUser = formData;
       connection.query("INSERT INTO User SET ?", [newUser], (err, results) => {
         if (err) {
-            console.log(newUser)
           return res.status(400).send(err.sqlMessage);
         } else {
             newUser.password = undefined;

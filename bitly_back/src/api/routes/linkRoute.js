@@ -10,6 +10,3 @@ module.exports = (app) => {
         .put(linkController.update) // Update a link with id
         .delete(linkController.delete); // Delete a link with id
 }
-
-
-
