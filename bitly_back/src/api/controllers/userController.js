@@ -26,11 +26,16 @@ exports.update = function(req, res) {
     // }
     // else {
         console.log(req.body);
-        Users.update(req.params.id, new User(req.body),
+        Users.update(req.params.id, new Users(req.body),
         function(err, User) {
-            if(err)
-            res.send(err);
-            res.json({error:false, message: 'User successfully updated'});
+            if(err) {
+                res.send(err);
+            }
+                else {
+                    res.json({error:false, message: 'User successfully updated'});
+                    console.log(User);
+                }
+    
         });
 //    }
 };

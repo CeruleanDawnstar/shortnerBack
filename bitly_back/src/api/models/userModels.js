@@ -3,13 +3,14 @@ const dataBaseHandler = new DataBaseHandler();
 const connection = dataBaseHandler.createConnection();
 
 
-const User = function(user){
-    this.idUser = user.idUser;
-    this.pseudo = user.pseudo;
-    this.password = user.password;
-};
+const Users = function(User){(
 
-User.findById = function (idUser, result) {
+    this.idUser = User.idUser,
+    this.pseudo = User.pseudo,
+    this.password = User.password
+)};
+
+Users.findById = function (idUser, result) {
     connection.query("SELECT * from User WHERE idUser =?", idUser, function (err, res) {
         if(err) {
             console.log("error: ", err);
@@ -23,7 +24,7 @@ User.findById = function (idUser, result) {
 };
 
 
-User.findAll = function (result) {
+Users.findAll = function (result) {
     connection.query("Select * from User", function (err, res) {
         if(err) {
             console.log("error: ", err);
@@ -36,8 +37,8 @@ User.findAll = function (result) {
     });
 };
 
-User.update = function(idUser, User, result) {
-    connection.query("UPDATE User SET pseudo=?,password=? WHERE idUser = ?",[user.pseudo,user.password, idUser],
+Users.update = function(idUser, User, result) {
+    connection.query("UPDATE User SET ? WHERE idUser = ?",[User, idUser],
     function (err, res) {
         if(err) {
             console.log("error: ", err);
@@ -49,7 +50,7 @@ User.update = function(idUser, User, result) {
     });
 };
 
-User.delete = function(idUser, result) {
+Users.delete = function(idUser, result) {
     connection.query("DELETE FROM User WHERE idUser = ?", [idUser], function (err, res) {
         if(err) {
             console.log("error: ", err);
@@ -62,4 +63,4 @@ User.delete = function(idUser, result) {
 };
 
 
-  module.exports = User;
+  module.exports = Users;
