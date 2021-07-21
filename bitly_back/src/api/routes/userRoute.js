@@ -20,7 +20,7 @@ module.exports = (app) => {
     app.route('/users')
     .get(userController.findAll)
 
-    app.route('/:id')
+    app.route('/users/:id')
     .get(userController.findById)
     .put(userController.update)
     .delete(userController.delete)
