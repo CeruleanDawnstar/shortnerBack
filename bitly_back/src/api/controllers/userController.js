@@ -1,8 +1,8 @@
-const Users = require('../models/userModels');
+const Utilisateurs = require('../models/userModels');
 
 
 exports.findAll = function(req, res) {
-    Users.findAll(function(err, User) {
+    Utilisateurs.findAll(function(err, User) {
         console.log('controller')
         if(err)
         res.send(err);
@@ -12,7 +12,7 @@ exports.findAll = function(req, res) {
 };
 
 exports.findById = function(req, res) {
-    Users.findById(req.params.id, function(err, User) {
+    Utilisateurs.findById(req.params.id, function(err, User) {
         if(err)
         res.send(err);
         console.log('res', User);
@@ -26,7 +26,7 @@ exports.update = function(req, res) {
     // }
     // else {
         console.log(req.body);
-        Users.update(req.params.id, new Users(req.body),
+        Utilisateurs.update(req.params.id, new Utilisateurs(req.body),
         function(err, User) {
             if(err) {
                 res.send(err);
@@ -41,7 +41,7 @@ exports.update = function(req, res) {
 };
 
 exports.delete = function(req, res) {
-    Users.delete(req.params.id, function(err, User) {
+    Utilisateurs.delete(req.params.id, function(err, User) {
         if(err)
         res.send(err);
         res.json({error:false, message: 'User successfully deleted'});

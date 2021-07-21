@@ -3,14 +3,14 @@ const dataBaseHandler = new DataBaseHandler();
 const connection = dataBaseHandler.createConnection();
 
 
-const Users = function(User){(
+const Utilisateurs = function(User){(
 
     this.idUser = User.idUser,
     this.pseudo = User.pseudo,
     this.password = User.password
 )};
 
-Users.findById = function (idUser, result) {
+Utilisateurs.findById = function (idUser, result) {
     connection.query("SELECT * from User WHERE idUser =?", idUser, function (err, res) {
         if(err) {
             console.log("error: ", err);
@@ -24,7 +24,7 @@ Users.findById = function (idUser, result) {
 };
 
 
-Users.findAll = function (result) {
+Utilisateurs.findAll = function (result) {
     connection.query("Select * from User", function (err, res) {
         if(err) {
             console.log("error: ", err);
@@ -37,20 +37,35 @@ Users.findAll = function (result) {
     });
 };
 
-Users.update = function(idUser, User, result) {
-    connection.query("UPDATE User SET ? WHERE idUser = ?",[User, idUser],
-    function (err, res) {
+// Utilisateurs.update = function(idUser, User, result) {
+//     connection.query("UPDATE User SET ? WHERE idUser = ?",[User, idUser],
+//     function (err, res) {
+//         if(err) {
+//             console.log("error: ", err);
+//             result(null, err);
+//         }
+//         else {
+//             result(null, res);
+//         }
+//     });
+// };
+
+Utilisateurs.update = function(idUser, User, result){
+    console.log(User);
+    dbConn.query("UPDATE User SET ? WHERE idUser = ?", [User, idUser],  (err, res) => {
         if(err) {
             console.log("error: ", err);
             result(null, err);
-        }
-        else {
+        }else{
             result(null, res);
         }
     });
 };
 
-Users.delete = function(idUser, result) {
+
+
+
+Utilisateurs.delete = function(idUser, result) {
     connection.query("DELETE FROM User WHERE idUser = ?", [idUser], function (err, res) {
         if(err) {
             console.log("error: ", err);
@@ -63,4 +78,4 @@ Users.delete = function(idUser, result) {
 };
 
 
-  module.exports = Users;
+  module.exports = Utilisateurs;
