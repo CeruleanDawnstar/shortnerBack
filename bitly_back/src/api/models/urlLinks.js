@@ -5,8 +5,8 @@ const dbConn = dataBaseHandler.createConnection();
 
 
 const urlLink = function (link){
-    this.longLink = link.longUrl;
-    this.shortLink = link.shortUrl;
+    this.longLink = link.longLink;
+    this.shortLink = link.shortLink;
     this.qrCode = link.qrCode;
     this.title = link.title;
     this.idUser = link.idUser;
