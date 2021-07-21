@@ -86,3 +86,40 @@ exports.findAll = (req, res) => {
         res.send(links)
     })
   }
+
+
+exports.update = (req, res)=> {
+    console.log(req.body);
+    urlLink.update(req.params.id, new urlLink(req.body), (err, data) =>{
+        if (err) {
+            res.status(500);
+            console.log(err);
+            res.json({
+                message: "Erreur serveur."
+            });
+        } else {
+            res.status(200);
+            res.json({ message: 'Link successfully updated' });
+           
+        }
+    });
+};
+
+exports.delete = (req, res)=> {
+  urlLink.delete( req.params.id, (err, data)=> {
+        if (err){
+        res.send(err);
+        res.json({ error:false, message: 'Link successfully deleted' });
+        }else{
+          res.send({ message: `link is deleted successfully!` })
+        }
+    });
+};
+
+exports.findById = function(req, res) {
+  urlLink.findById(req.params.id, function(err, link) {
+      if (err)
+      res.send(err);
+      res.json(link);
+  });
+};

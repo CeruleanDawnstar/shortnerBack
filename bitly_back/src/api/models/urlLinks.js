@@ -38,7 +38,7 @@ urlLink.findAll = (result)=>{
 }
 
 urlLink.findById = (id, result)=>{
-    dbConn.query("SELECT * FROM link WHERE id = ?", id, (err, res)=>{
+    dbConn.query("SELECT * FROM link WHERE idLink = ?", [id], (err, res)=>{
         if(err){
             console.log("error: ", err);
             result(err, null);
@@ -59,6 +59,31 @@ urlLink.findOne = (qrCode, result)=>{
         }
     })
 }
+
+
+urlLink.update = function(id, link, result){
+    console.log(link);
+    dbConn.query("UPDATE link SET ? WHERE idLink = ?", [link, id],  (err, res) => {
+        if(err) {
+            console.log("error: ", err);
+            result(null, err);
+        }else{
+            result(null, res);
+        }
+    });
+};
+
+urlLink.delete = function(id, result){
+    dbConn.query("DELETE FROM link WHERE id = ?", [id], function (err, res) {
+        if(err) {
+            console.log("error: ", err);
+            result(null, err);
+        }
+        else{
+            result(null, res);
+        }
+    });
+};
 
 
 module.exports = urlLink;

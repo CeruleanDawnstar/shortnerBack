@@ -1,10 +1,8 @@
-
-
 const link = require('../models/urlLinks')
 
 
 exports.findOne = (req, res) => {
-    link.findById(req.params.qrCode, (err, data) => {
+    link.findOne(req.params.qrCode, (err, data) => {
       if (err) {
         if (err.kind === "not found") {
           res.status(404).send({
