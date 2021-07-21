@@ -3,14 +3,14 @@ const dataBaseHandler = new DataBaseHandler();
 const connection = dataBaseHandler.createConnection();
 
 
-var User = function(user){
+const User = function(user){
     this.idUser = user.idUser;
     this.pseudo = user.pseudo;
     this.password = user.password;
 };
 
-User.findById = function (id, result) {
-    connection.query("SELECT * from User where idUser = ?", id, function (err, res) {
+User.findById = function (idUser, result) {
+    connection.query("SELECT * from User WHERE idUser =?", idUser, function (err, res) {
         if(err) {
             console.log("error: ", err);
 
@@ -21,6 +21,7 @@ User.findById = function (id, result) {
         }
     });
 };
+
 
 User.findAll = function (result) {
     connection.query("Select * from User", function (err, res) {
@@ -49,7 +50,7 @@ User.update = function(idUser, User, result) {
 };
 
 User.delete = function(idUser, result) {
-    connection.query("DELETE FROM User WHERE id = ?", [idUser], function (err, res) {
+    connection.query("DELETE FROM User WHERE idUser = ?", [idUser], function (err, res) {
         if(err) {
             console.log("error: ", err);
             result(null, err);

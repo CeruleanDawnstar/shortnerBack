@@ -1,5 +1,6 @@
 const Users = require('../models/userModels');
 
+
 exports.findAll = function(req, res) {
     Users.findAll(function(err, User) {
         console.log('controller')
@@ -11,7 +12,7 @@ exports.findAll = function(req, res) {
 };
 
 exports.findById = function(req, res) {
-    Users.findById(req.params.idUser, function(err, User) {
+    Users.findById(req.params.id, function(err, User) {
         if(err)
         res.send(err);
         console.log('res', User);
@@ -20,23 +21,25 @@ exports.findById = function(req, res) {
 };
 
 exports.update = function(req, res) {
-    if(req.body.constructor === Object && Object.keys(req.body).length === 0) {
-        res.status(400).send({error:true, message: 'Please provide all required field'});
-    }
-    else {
-        User.update(req.params.id, new User(req.body),
+    // if(req.body.constructor === Object && Object.keys(req.body).length === 0) {
+    //     res.status(400).send({error:true, message: 'Please provide all required field'});
+    // }
+    // else {
+        console.log(req.body);
+        Users.update(req.params.id, new User(req.body),
         function(err, User) {
             if(err)
             res.send(err);
             res.json({error:false, message: 'User successfully updated'});
         });
-    }
+//    }
 };
 
 exports.delete = function(req, res) {
-    User.delete(req.params.idUser, function(err, User) {
+    Users.delete(req.params.id, function(err, User) {
         if(err)
         res.send(err);
         res.json({error:false, message: 'User successfully deleted'});
     });
 };
+
