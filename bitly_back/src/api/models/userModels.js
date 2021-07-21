@@ -52,7 +52,7 @@ Utilisateurs.findAll = function (result) {
 
 Utilisateurs.update = function(idUser, User, result){
     console.log(User);
-    dbConn.query("UPDATE User SET ? WHERE idUser = ?", [User, idUser],  (err, res) => {
+    connection.query("UPDATE User SET ? WHERE idUser = ?", [User, idUser],  (err, res) => {
         if(err) {
             console.log("error: ", err);
             result(null, err);
