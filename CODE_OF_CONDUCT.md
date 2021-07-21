@@ -1,4 +1,4 @@
-# Contributor Covenant Code of Conduct
+# :tanabata_tree:Contributor Covenant Code of Conduct:tanabata_tree:
 
 ## Our Pledge
 
