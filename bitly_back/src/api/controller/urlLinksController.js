@@ -1,4 +1,10 @@
 const urlLink = require('../models/urlLinks');
+const DataBaseHandler = require("../config/DataBaseHandler");
+const dataBaseHandler = new DataBaseHandler();
+
+const connection = dataBaseHandler.createConnection();
+const validUrl = require("valid-url");
+const shortid = require("shortid");
 
 exports.create = (req, res) => {
 
@@ -7,28 +13,65 @@ exports.create = (req, res) => {
           message: "Content can not be empty!"
         });
       }
+            //the API base URL 
+            const baseUrl = "http://localhost:8125"
+            const longUrl= req.body.longUrl;
+            console.log(longUrl)
+    
+            if(!validUrl.isUri(baseUrl)){
+                return res.status(401).json("Invalid baseUrl");
+            }
+      
+            const urlCode = shortid.generate()
+            console.log(urlCode)
+        
+            if (validUrl.isUri(longUrl)) {
+                try {
+                 connection.query(`SELECT longLink, shortLink FROM link WHERE longLink = ${longUrl}`, [longUrl], (err, result)=>{
+                  if (result) {
+                   return  res.status(200).json(result);
+                  } else {
+                   const shortUrl = baseUrl + "/" + urlCode;
+                   console.log(shortUrl) 
+              
+                        const newLinks = new urlLink({
+                            longLink: longUrl,
+                            shortLink: shortUrl,
+                            qrCode: urlCode,
+                            /*title : req.body.title,
+                            idUser : req.body.idUser,*/
+                            date : req.body.dateLink
+                        });
+                    
+                    
+                    
+                    urlLink.create(newLinks, (err, data) => {
+                    
+                            if (err)
+                            res.status(500).send({
+                              message:
+                                err.message || "Some error occurred while creating the Customer."
+                            });
+                          else res.send(data);
+                        });
+                    
+                    }
 
-    const newLinks = new urlLink({
-        longUrl: req.body.longUrl,
-        shortUrl: req.body.shortUrl,
-        urlCode: req.body.shortUrl,
-        qrCode: req.body.qrCode,
-        title : req.body.title,
-        idUser : req.body.idUser,
-        date : req.body.dateLink
-    });
 
-    urlLink.create(newLinks, (err, data) => {
+                  }
+                );
+            }
+          // exception handler
+          catch (err) {
+               console.log(err)
+               res.status(500).json('Server Error')
+             }
+           } else {
+           res.status(401).json('Invalid longUrl')
+           }
+          }
 
-        if (err)
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating the Customer."
-        });
-      else res.send(data);
-    });
 
-}
 
 exports.findAll = (req, res) => {
     urlLink.findAll((err, links)=>{
@@ -42,5 +85,4 @@ exports.findAll = (req, res) => {
 
         res.send(links)
     })
-}
-
+  }
