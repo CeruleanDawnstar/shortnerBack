@@ -29,6 +29,7 @@ services:
     restart: on-failure
     environment:
      - DATABASE_HOST=db
+     - CHOKIDAR_USEPOLLING=true
     volumes:
      - ./src/api:/app/api
   pma:

@@ -1,12 +1,13 @@
-const linkController = require('../controller/urlLinksController');
+const linkController = require('../controllers/urlLinksController');
+const jwtMiddleWare = require('../middlewares/jwtmiddleware');
 
 module.exports = (app) => {
     app.route('/link')
-        .get(linkController.findAll) // Retrieve all links
+        .get(jwtMiddleWare.verifyToken, linkController.findAll) // Retrieve all links
         .post(linkController.create);// Create a new link
 
     app.route('/link/:id')
-        .get(linkController.findById) // Retrieve a single link with id
-        .put(linkController.update) // Update a link with id
-        .delete(linkController.delete); // Delete a link with id
+        .get(jwtMiddleWare.verifyToken, linkController.findById) // Retrieve a single link with id
+        .put(jwtMiddleWare.verifyToken, linkController.update) // Update a link with id
+        .delete(jwtMiddleWare.verifyToken, linkController.delete); // Delete a link with id
 }
