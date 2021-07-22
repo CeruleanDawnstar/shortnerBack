@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const jwtKey = process.env.JWT_KEY;
+const jwtKey = process.env.JWT_SECRET || "jwt_secret";
 
 exports.verifyToken = (req, res, next) => {
     let token = req.headers['authorization'];
