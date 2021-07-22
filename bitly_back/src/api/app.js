@@ -15,12 +15,12 @@ app.use(cors({
 const login = require('./routes/login');
 const signUp = require('./routes/signUp');
 
-//const userRoute = require('./routes/userRoute');
-//userRoute(app); 
-
 app.use(passport.initialize());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+
+const userRoute = require('./routes/userRoute.js');
+userRoute(app);
 
 const linkRoute = require('./routes/linkRoute');
 linkRoute(app);
@@ -28,5 +28,4 @@ linkRoute(app);
 app.use('/login', login);
 app.use('/signUp', signUp);
 
-//listen for requests
 app.listen(port, hostname);

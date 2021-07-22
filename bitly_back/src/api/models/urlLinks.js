@@ -41,7 +41,6 @@ urlLink.findById = (id, result)=>{
     })
 }
 
-
 urlLink.findOne = (qrCode, result)=>{
     dbConn.query("SELECT longLink FROM link WHERE qrCode = ?", qrCode, (err, res)=>{
         if(err){
