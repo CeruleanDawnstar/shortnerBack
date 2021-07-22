@@ -1,8 +1,6 @@
-//const dbConn = require('../config/DataBaseHandler');
 const DataBaseHandler = require("../config/DataBaseHandler");
 const dataBaseHandler = new DataBaseHandler();
 const dbConn = dataBaseHandler.createConnection();
-
 
 const urlLink = function (link){
     this.longLink = link.longLink;
@@ -10,28 +8,24 @@ const urlLink = function (link){
     this.qrCode = link.qrCode;
     this.title = link.title;
     this.idUser = link.idUser;
-    this.dateLink = link.dateLink
+    this.dateLink = new Date();
 };
 
 urlLink.create = (newLinks, result)=>{
     dbConn.query("INSERT INTO link SET ?", newLinks, (err, res)=>{
         if(err){
-            console.log("error: ", err);
             result(err, null);
         }else{
-            console.log(res.insertedId)
             result(null, {id: res.insertedId, ...newLinks });
-        }        
+        }
     })
 }
 
 urlLink.findAll = (result)=>{
     dbConn.query("SELECT idLink, longLink, shortLink FROM link", (err, res)=>{
         if(err){
-            console.log("error: ", err);
             result(err, null);
         }else{
-            console.log('links : ', res)
             result(null, res);
         }
     })
@@ -40,7 +34,6 @@ urlLink.findAll = (result)=>{
 urlLink.findById = (id, result)=>{
     dbConn.query("SELECT * FROM link WHERE idLink = ?", [id], (err, res)=>{
         if(err){
-            console.log("error: ", err);
             result(err, null);
         }else{
             result(res);
@@ -52,7 +45,6 @@ urlLink.findById = (id, result)=>{
 urlLink.findOne = (qrCode, result)=>{
     dbConn.query("SELECT longLink FROM link WHERE qrCode = ?", qrCode, (err, res)=>{
         if(err){
-            console.log("error: ", err);
             result(err, null);
         }else{
             result(res);
@@ -62,10 +54,8 @@ urlLink.findOne = (qrCode, result)=>{
 
 
 urlLink.update = function(id, link, result){
-    console.log(link);
     dbConn.query("UPDATE link SET ? WHERE idLink = ?", [link, id],  (err, res) => {
         if(err) {
-            console.log("error: ", err);
             result(null, err);
         }else{
             result(null, res);
@@ -74,9 +64,8 @@ urlLink.update = function(id, link, result){
 };
 
 urlLink.delete = function(id, result){
-    dbConn.query("DELETE FROM link WHERE id = ?", [id], function (err, res) {
+    dbConn.query("DELETE FROM link WHERE idLink = ?", [id], function (err, res) {
         if(err) {
-            console.log("error: ", err);
             result(null, err);
         }
         else{
@@ -84,6 +73,5 @@ urlLink.delete = function(id, result){
         }
     });
 };
-
 
 module.exports = urlLink;

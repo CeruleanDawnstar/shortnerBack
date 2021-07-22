@@ -14,15 +14,11 @@ app.use(cors({
 
 const login = require('./routes/login');
 const signUp = require('./routes/signUp');
-//const shortLinks = require('./routes/urlLinkRoute');
-//const allLinks = require('./routes/urlLinkRoute');
 
 //const userRoute = require('./routes/userRoute');
 //userRoute(app); 
 
-//app.use(cors());
 app.use(passport.initialize());
-
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
@@ -31,9 +27,6 @@ linkRoute(app);
 
 app.use('/login', login);
 app.use('/signUp', signUp);
-//app.use('/short', shortLinks);
-//app.use('/links', allLinks);
-//app.use('/links/:qrCode', allLinks);
 
 //listen for requests
 app.listen(port, hostname);
