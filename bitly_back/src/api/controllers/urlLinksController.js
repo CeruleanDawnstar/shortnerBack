@@ -100,14 +100,15 @@ exports.findById = function(req, res) {
 };
 
 exports.findByQrCode = (req, res) =>{
-  urlLink.findOne(req.params.qrCode, (err, res) =>{
-    if (res) {
-      res.send(url);
-      res.redirect(res)
+  urlLink.findOne(req.params.qrCode, URL =>{
+    if (URL) {
+      console.log(URL);
+      res.redirect(URL.longLink)
+      //res.send(err);
     }else{
-      console.log(err);
+      console.log("ERROR");
       //res.json(url);
-      res.redirect(res.longLink)
+      //res.redirect(URL.longLink)
     }   
   });
 };
