@@ -45,7 +45,7 @@ You can try different CRUD operations via Postman with the following setups :
 
 # :busts_in_silhouette:Contributors:busts_in_silhouette:
 Contributors of this project include :
-# [skillyHawk](https://github.com/skillyHawk) (Rémi)
+# [skillyHawk](https://github.com/skillyHawk) (Rémy)
 # [296341](https://github.com/296341) (Antoine)
 # [CeruleanDawnstar](https://github.com/CeruleanDawnstar) (Tahir)
 
