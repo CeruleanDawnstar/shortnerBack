@@ -12,7 +12,7 @@ exports.findAll = function(req, res) {
 };
 
 exports.findById = function(req, res) {
-    Utilisateurs.findById(req.params.id, function(err, User) {
+    utilisateurs.findById(req.params.id, function(err, User) {
         if(err)
         res.send(err);
         console.log('res', User);
@@ -35,7 +35,7 @@ exports.update = (req, res)=> {
 };
 
 exports.delete = function(req, res) {
-    Utilisateurs.delete(req.params.id, function(err, User) {
+    utilisateurs.delete(req.params.id, function(err, User) {
         if(err)
         res.send(err);
         res.json({error:false, message: 'User successfully deleted'});

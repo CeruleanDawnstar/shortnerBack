@@ -1,6 +1,8 @@
 const DataBaseHandler = require("../config/DataBaseHandler");
 const dataBaseHandler = new DataBaseHandler();
 const connection = dataBaseHandler.createConnection();
+const bcrypt = require("bcrypt");
+const saltRounds = process.env.SALT_ROUNDS || "10";
 
 const utilisateurs = function(User){
     this.pseudo = User.pseudo;
@@ -35,14 +37,17 @@ utilisateurs.findAll = function (result) {
 
 utilisateurs.update = function(idUser, User, result){
     console.log(User);
-    connection.query("UPDATE User SET ? WHERE idUser = ?", [User, idUser],  (err, res) => {
-        if(err) {
+    bcrypt.hash(User.password, parseInt(saltRounds), (err, hash) => {
+        User.password = hash;
+        connection.query("UPDATE User SET ? WHERE idUser = ?", [User, idUser],  (err, res) => {
+          if (err) {
             console.log("error: ", err);
             result(null, err);
-        }else{
+          } else {
             result(null, res);
-        }
-    });
+              }
+          });
+      });
 };
 
 utilisateurs.delete = function(idUser, result) {
