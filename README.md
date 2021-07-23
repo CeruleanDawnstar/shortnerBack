@@ -35,7 +35,7 @@ You can try different CRUD operations via Postman with the following setups :
 ## Users
 - To get a list of all Users, select GET(choice list left to where you insert your link) then paste the following link [http://localhost:8125/users] then click Send
 - To get a User using his ID, select GET(choice list left to where you insert your link) then paste the following link [http://localhost:8125/users/1] to list the User whose ID is 1
-- To edit a User using his ID, select PUT(choice list left to where you insert your link) then paste the following link [http://localhost:8125/users/1] to edit the User whose ID is 1
+- To edit a User using his ID, select PUT(choice list left to where you insert your link) then paste the following link [http://localhost:8125/users/1] to edit the User whose ID is 1 and you need to fill both pseudo and password into the body
 - To delete a User using his ID, select DELETE(choice list left to where you insert your link) then paste the following link [http://localhost:8125/users/1] to delete the User whose ID is 1
 - To create a User using speudo and pasword, select POST(choice list left to where you insert your link) then paste the following link [http://localhost:8125/signUp] to create a new user
 - To log in as a User and get a token you need to use his speudo and password, select post(choice list left to where you insert your link) then paste the following link [http://localhost:8125/login]. You receive the token you need to acces to the user link
