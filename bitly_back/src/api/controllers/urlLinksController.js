@@ -16,78 +16,9 @@ exports.create = (req, res) => {
   const baseUrl = "http://localhost:8125"
   const longUrl= req.body.longUrl;
 
-    if (!req.body) {
-        res.status(400).send({
-          message: "Content can not be empty!"
-        });
-      }
-            //the API base URL 
-            const baseUrl = "http://localhost:8125"
-            const longUrl= req.body.longUrl;
-            console.log(longUrl)
-    
-            if(!validUrl.isUri(baseUrl)){
-                return res.status(401).json("Invalid baseUrl");
-            }
-      
-            const urlCode = shortid.generate()
-            console.log(urlCode)
-        
-            if (validUrl.isUri(longUrl)) {
-                try {
-                 connection.query(`SELECT longLink, shortLink FROM link WHERE longLink = ${longUrl}`, [longUrl], (err, result)=>{
-                  if (result) {
-                   return  res.status(200).json(result);
-                  } else {
-                   const shortUrl = baseUrl + "/" + urlCode;
-                   console.log(shortUrl) 
-              
-                        const newLinks = new urlLink({
-                            longLink: longUrl,
-                            shortLink: shortUrl,
-                            qrCode: urlCode,
-                            /*title : req.body.title,
-                            idUser : req.body.idUser,*/
-                            date : req.body.dateLink
-                        });
-                    
-                    
-                    
-                    urlLink.create(newLinks, (err, data) => {
-                    
-                            if (err)
-                            res.status(500).send({
-                              message:
-                                err.message || "Some error occurred while creating the link."
-                            });
-                          else res.send(data);
-                        });
-                    
-                    }
-
-
-                  }
-                );
-            }
-          // exception handler
-          catch (err) {
-               console.log(err)
-               res.status(500).json('Server Error')
-             }
-           } else {
-           res.status(401).json('Invalid longUrl')
-           }
-          }
-
-
-
-exports.findAll = (req, res) => {
-    urlLink.findAll((err, links)=>{
-        console.log('controller')
-
-        if(err)
-
-        res.send(err);
+  if(!validUrl.isUri(baseUrl)){
+      return res.status(401).json("Invalid baseUrl");
+  }
 
   const urlCode = shortid.generate()
 
@@ -165,5 +96,18 @@ exports.findById = function(req, res) {
     if (err)
     res.send(err);
     res.json(link);
+  });
+};
+
+exports.findByQrCode = (req, res) =>{
+  urlLink.findOne(req.params.qrCode, (err, res) =>{
+    if (res) {
+      res.send(url);
+      res.redirect(res)
+    }else{
+      console.log(err);
+      //res.json(url);
+      res.redirect(res.longLink)
+    }   
   });
 };

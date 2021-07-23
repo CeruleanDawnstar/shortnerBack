@@ -42,11 +42,13 @@ urlLink.findById = (id, result)=>{
 }
 
 urlLink.findOne = (qrCode, result)=>{
-    dbConn.query("SELECT longLink FROM link WHERE qrCode = ?", qrCode, (err, res)=>{
+    dbConn.query("SELECT longLink FROM link WHERE qrCode = ?", [qrCode], (err, res)=>{
         if(err){
             result(err, null);
         }else{
-            result(res);
+            //const url = JSON.parse(resp[0])
+            //console.log(url.longLink);
+            result(res[0].longLink);
         }
     })
 }
