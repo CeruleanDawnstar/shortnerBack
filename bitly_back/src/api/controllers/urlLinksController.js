@@ -98,3 +98,17 @@ exports.findById = function(req, res) {
     res.json(link);
   });
 };
+
+exports.findByQrCode = (req, res) =>{
+  urlLink.findOne(req.params.qrCode, URL =>{
+    if (URL) {
+      console.log(URL);
+      res.redirect(URL.longLink)
+      //res.send(err);
+    }else{
+      console.log("ERROR");
+      //res.json(url);
+      //res.redirect(URL.longLink)
+    }   
+  });
+};
