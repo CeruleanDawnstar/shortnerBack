@@ -1,5 +1,7 @@
 # :link:shortnerBack:link:
-Backend web app for a link shortner
+Backend web app for a link shortner.
+
+Latest branch is Main.
 
 # :white_check_mark:Prerequisites:white_check_mark:
 
