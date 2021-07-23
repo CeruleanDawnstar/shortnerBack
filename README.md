@@ -29,6 +29,18 @@ And restart the server back up :
 > `docker-compose up --build`
 
 To test out the project, you can use applications like [Postman].(https://www.postman.com/)
+You can try different CRUD operations via Postman with the following setups :
+## Users
+- To get a list of all Users, select GET(choice list left to where you insert your link) then paste the following link [http://localhost:8125/users] then click Send
+- To get a User using his ID, select GET(choice list left to where you insert your link) then paste the following link [http://localhost:8125/users/1] to list the User whose ID is 1
+- To edit a User using his ID, select PUT(choice list left to where you insert your link) then paste the following link [http://localhost:8125/users/1] to edit the User whose ID is 1
+- To delete a User using his ID, select DELETE(choice list left to where you insert your link) then paste the following link [http://localhost:8125/users/1] to delete the User whose ID is 1
+
+## Links
+- To get a list of all Links, select GET(choice list left to where you insert your link) then paste the following link [http://localhost:8125/link] then click Send
+- To get a Link using his ID, select GET(choice list left to where you insert your link) then paste the following link [http://localhost:8125/link/1] to list the Link whose ID is 1
+- To edit a Link using his ID, select PUT(choice list left to where you insert your link) then paste the following link [http://localhost:8125/link/1] to edit the Link whose ID is 1
+- To delete a Link using his ID, select DELETE(choice list left to where you insert your link) then paste the following link [http://localhost:8125/link/1] to delete the Link whose ID is 1
 
 
 # :busts_in_silhouette:Contributors:busts_in_silhouette:
